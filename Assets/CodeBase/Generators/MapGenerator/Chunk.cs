@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Chunk : MonoBehaviour
+namespace CodeBase.Generators.MapGenerator
 {
-    // Start is called before the first frame update
-    void Start()
+  public class Chunk : MonoBehaviour
+  {
+    public void Initialize()
     {
-        
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  }
 }

@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MapChunk : MonoBehaviour
+namespace CodeBase.Generators.MapGenerator
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  public class MapChunk
+  {
+    private int _coordinateX;
+    private int _coordinateY;
 
-    // Update is called once per frame
-    void Update()
+    public int X => _coordinateX;
+    public int Y => _coordinateY;
+
+    public MapChunk(int x, int y)
     {
-        
+      _coordinateX = x;
+      _coordinateY = y;
     }
+  }
 }

@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MapSpawner : MonoBehaviour
+namespace CodeBase.Generators.MapGenerator
 {
-    // Start is called before the first frame update
-    void Start()
+  public class MapSpawner : MonoBehaviour
+  {
+    public void Initialize()
     {
-        
+    
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  }
 }
