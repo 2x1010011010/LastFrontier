@@ -6,6 +6,7 @@ namespace CodeBase.Generators.MapGenerator
   {
     [SerializeField] private Chunk _mapChunkPrefab;
     [SerializeField] private Chunk _roadChunkPrefab;
+    [SerializeField] private GameObject _castlePrefab;
     [SerializeField] private int _mapSizeX;
     [SerializeField] private int _mapSizeZ;
     [SerializeField] private Vector3 _chunkSize;
@@ -30,6 +31,8 @@ namespace CodeBase.Generators.MapGenerator
           _spawnedChunks[x, z] = chunk;
         }
       }
+      
+      SpawnCastle();
     }
 
     private void SpawnRoad()
@@ -39,7 +42,7 @@ namespace CodeBase.Generators.MapGenerator
 
     private void SpawnCastle()
     {
-      
+      var castle = Instantiate(_castlePrefab, new Vector3(_mapSizeX / 2, 0, _mapSizeZ * _chunkSize.z + _chunkSize.z), _castlePrefab.transform.rotation);
     }
 
     private void SpawnPortal()

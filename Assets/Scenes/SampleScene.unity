@@ -377,8 +377,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mapChunkPrefab: {fileID: 6225898673215629945, guid: c2e3a6f20d30c574c9c3e2142667f81e, type: 3}
   _roadChunkPrefab: {fileID: 6363358738138021436, guid: d05233e6e31aebb478654beb71f8a026, type: 3}
-  _mapSizeX: 8
-  _mapSizeZ: 16
+  _castlePrefab: {fileID: 2888982414222755443, guid: ae75205524e8a01409619b0f3396e9eb, type: 3}
+  _mapSizeX: 9
+  _mapSizeZ: 8
   _chunkSize: {x: 2, y: 2, z: 2}
 --- !u!4 &1134232006
 Transform:
