@@ -42,7 +42,7 @@ namespace CodeBase.Generators.MapGenerator
 
     private void SpawnCastle()
     {
-      var castle = Instantiate(_castlePrefab, new Vector3(_mapSizeX / 2, 0, _mapSizeZ * _chunkSize.z + _chunkSize.z), _castlePrefab.transform.rotation);
+      var castle = Instantiate(_castlePrefab, new Vector3((_mapSizeX / 2) * _chunkSize.x, 0, _mapSizeZ * _chunkSize.z + _chunkSize.z), _castlePrefab.transform.rotation);
     }
 
     private void SpawnPortal()
