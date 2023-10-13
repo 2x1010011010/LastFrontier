@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 1134232005}
+  _mapSettings: {fileID: 11400000, guid: c115f261e56e5c443b4c78a73449f751, type: 2}
 --- !u!4 &732038967
 Transform:
   m_ObjectHideFlags: 0
@@ -375,12 +376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ede2a4b83c62854c905e87fb6f1d1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapChunkPrefab: {fileID: 6225898673215629945, guid: c2e3a6f20d30c574c9c3e2142667f81e, type: 3}
-  _roadChunkPrefab: {fileID: 6363358738138021436, guid: d05233e6e31aebb478654beb71f8a026, type: 3}
-  _castlePrefab: {fileID: 2888982414222755443, guid: ae75205524e8a01409619b0f3396e9eb, type: 3}
-  _mapSizeX: 9
-  _mapSizeZ: 8
-  _chunkSize: {x: 2, y: 2, z: 2}
 --- !u!4 &1134232006
 Transform:
   m_ObjectHideFlags: 0

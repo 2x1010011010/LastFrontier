@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6870cbdcc937846a3609cf65ef5d57, type: 3}
+  m_Name: MapGeneratorSettings1
+  m_EditorClassIdentifier: 
+  <MapChunkPrefab>k__BackingField: {fileID: 6225898673215629945, guid: c2e3a6f20d30c574c9c3e2142667f81e, type: 3}
+  <RoadChunkPrefab>k__BackingField: {fileID: 6363358738138021436, guid: d05233e6e31aebb478654beb71f8a026, type: 3}
+  <CastlePrefab>k__BackingField: {fileID: 2888982414222755443, guid: ae75205524e8a01409619b0f3396e9eb, type: 3}
+  <MapSizeX>k__BackingField: 3
+  <MapSizeZ>k__BackingField: 5
+  <ChunkSize>k__BackingField: {x: 2, y: 2, z: 2}

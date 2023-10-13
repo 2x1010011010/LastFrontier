@@ -1,21 +1,33 @@
+using CodeBase.Generators.MapGenerator.ScriptableObjects;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CodeBase.Generators.MapGenerator
 {
   public class MapSpawner : MonoBehaviour
   {
-    [SerializeField] private Chunk _mapChunkPrefab;
-    [SerializeField] private Chunk _roadChunkPrefab;
-    [SerializeField] private GameObject _castlePrefab;
-    [SerializeField] private int _mapSizeX;
-    [SerializeField] private int _mapSizeZ;
-    [SerializeField] private Vector3 _chunkSize;
+    private Chunk _mapChunkPrefab;
+    private Chunk _roadChunkPrefab;
+    private GameObject _castlePrefab;
+    private int _mapSizeX;
+    private int _mapSizeZ;
+    private Vector3 _chunkSize;
     private Chunk[,] _spawnedChunks;
     private MapChunk[,] _mapChunks;
       
     public Chunk[,] SpawnedChunks => _spawnedChunks;
     public MapChunk[,] MapChunks => _mapChunks;
-      
+
+    public void Initialize(MapGeneratorSettings settings)
+    {
+      _mapChunkPrefab = settings.MapChunkPrefab;
+      _roadChunkPrefab = settings.RoadChunkPrefab;
+      _castlePrefab = settings.CastlePrefab;
+      _mapSizeX = settings.MapSizeX;
+      _mapSizeZ = settings.MapSizeZ;
+      _chunkSize = settings.ChunkSize;
+    }
+
     public void SpawnMap()
     {
       var generator = new MapGenerator(_mapSizeX, _mapSizeZ);
@@ -33,6 +45,7 @@ namespace CodeBase.Generators.MapGenerator
       }
       
       SpawnCastle();
+      SpawnPortal();
     }
 
     private void SpawnRoad()
@@ -47,7 +60,10 @@ namespace CodeBase.Generators.MapGenerator
 
     private void SpawnPortal()
     {
-      
+      var portalCoordinateX = Random.Range(0, _mapSizeX);
+      Destroy(_spawnedChunks[portalCoordinateX, 0].gameObject);
+      var portal = Instantiate(_roadChunkPrefab, new Vector3(portalCoordinateX * _chunkSize.x,0, 0), _roadChunkPrefab.transform.rotation);
+      _spawnedChunks[portalCoordinateX, 0] = portal;
     }
   }
 }
