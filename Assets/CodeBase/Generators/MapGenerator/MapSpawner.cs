@@ -55,15 +55,22 @@ namespace CodeBase.Generators.MapGenerator
 
     private void SpawnCastle()
     {
-      var castle = Instantiate(_castlePrefab, new Vector3((_mapSizeX / 2) * _chunkSize.x, 0, _mapSizeZ * _chunkSize.z + _chunkSize.z), _castlePrefab.transform.rotation);
+      var castle = Instantiate(_castlePrefab, new Vector3(_mapSizeX / 2 * _chunkSize.x, 0, _mapSizeZ * _chunkSize.z + _chunkSize.z), _castlePrefab.transform.rotation);
+      SpawnRoadChunk(_mapSizeX/2, _mapSizeZ-1);
     }
 
     private void SpawnPortal()
     {
       var portalCoordinateX = Random.Range(0, _mapSizeX);
-      Destroy(_spawnedChunks[portalCoordinateX, 0].gameObject);
-      var portal = Instantiate(_roadChunkPrefab, new Vector3(portalCoordinateX * _chunkSize.x,0, 0), _roadChunkPrefab.transform.rotation);
-      _spawnedChunks[portalCoordinateX, 0] = portal;
+      SpawnRoadChunk(portalCoordinateX, 0);
+    }
+
+    private void SpawnRoadChunk(int x, int z)
+    {
+      Destroy(_spawnedChunks[x, z].gameObject);
+      var roadChunk = Instantiate(_roadChunkPrefab, new Vector3(x * _chunkSize.x,0, z * _chunkSize.z), _roadChunkPrefab.transform.rotation);
+      _spawnedChunks[x, z] = roadChunk;
+      _mapChunks[x, z].VisitChunk();
     }
   }
 }

@@ -6,6 +6,7 @@ namespace CodeBase.Generators.MapGenerator
   {
     private int _coordinateX;
     private int _coordinateY;
+    public bool Visited { get; private set; }
 
     public int X => _coordinateX;
     public int Y => _coordinateY;
@@ -14,6 +15,12 @@ namespace CodeBase.Generators.MapGenerator
     {
       _coordinateX = x;
       _coordinateY = y;
+      Visited = false;
+    }
+
+    public void VisitChunk()
+    {
+      Visited = true;
     }
   }
 }
