@@ -8,6 +8,8 @@ namespace CodeBase.Generators.MapGenerator
     private int _coordinateY;
     public bool Visited { get; private set; }
 
+    public MapChunk Parent { get; set; }
+
     public int X => _coordinateX;
     public int Y => _coordinateY;
 
