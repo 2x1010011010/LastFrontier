@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Generators.MapGenerator.ScriptableObjects;
 using UnityEngine;
 
@@ -93,18 +94,10 @@ namespace CodeBase.Generators.MapGenerator
           return RetracePath(start, finish);
         }
 
-        foreach (var neighbor in FindNeighbors(currentChunk))
+        foreach (var neighbor in FindNeighbors(currentChunk).Where(neighbor => !closedSet.Contains(neighbor)).Where(neighbor => !openSet.Contains(neighbor)))
         {
-          if (closedSet.Contains(neighbor))
-          {
-            continue;
-          }
-
-          if (!openSet.Contains(neighbor))
-          {
-            neighbor.Parent = currentChunk;
-            openSet.Enqueue(neighbor);
-          }
+          neighbor.Parent = currentChunk;
+          openSet.Enqueue(neighbor);
         }
 
         closedSet.Add(currentChunk);
@@ -121,7 +114,7 @@ namespace CodeBase.Generators.MapGenerator
       {
         for (int y = -1; y <= 1; y++)
         {
-          if (x == 0 && y == 0)
+          if (x == 0 && y == 0 || Mathf.Abs(x) == Mathf.Abs(y))
             continue;
 
           var checkX = currentChunk.X + x;
