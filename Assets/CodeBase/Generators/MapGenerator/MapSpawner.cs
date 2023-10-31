@@ -114,7 +114,7 @@ namespace CodeBase.Generators.MapGenerator
       {
         for (int y = -1; y <= 1; y++)
         {
-          if (x == 0 && y == 0 || Mathf.Abs(x) == Mathf.Abs(y))
+          if (Mathf.Abs(x) == Mathf.Abs(y))
             continue;
 
           var checkX = currentChunk.X + x;
