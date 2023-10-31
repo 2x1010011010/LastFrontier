@@ -90,14 +90,14 @@ namespace CodeBase.Generators.MapGenerator
 
         if (currentChunk == finish)
         {
-          return null;
+          return RetracePath(start, finish);
         }
 
         foreach (var neighbor in FindNeighbors(currentChunk))
         {
           if (closedSet.Contains(neighbor))
           {
-            return RetracePath(start, finish);
+            continue;
           }
 
           if (!openSet.Contains(neighbor))
@@ -130,7 +130,6 @@ namespace CodeBase.Generators.MapGenerator
           if (checkX >= 0 && checkX < _mapSizeX && checkY >= 0 && checkY < _mapSizeZ)
           {
             neighbors.Add(_mapChunks[checkX, checkY]);
-            Debug.Log("Chunk " + checkX + " " + checkY + " added");
           }
         }
       }
