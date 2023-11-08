@@ -15,9 +15,11 @@ namespace CodeBase.Generators.MapGenerator
     private Vector3 _chunkSize;
     private Chunk[,] _spawnedChunks;
     private MapChunk[,] _mapChunks;
+    private HashSet<Chunk> _path;
       
     public Chunk[,] SpawnedChunks => _spawnedChunks;
     public MapChunk[,] MapChunks => _mapChunks;
+    public HashSet<Chunk> Path => _path;
 
     public void Initialize(MapGeneratorSettings settings)
     {
@@ -50,10 +52,24 @@ namespace CodeBase.Generators.MapGenerator
       SpawnRoad(startPoint, finishPoint);
     }
 
+
     private void SpawnRoad(MapChunk start, MapChunk finish)
     {
-      foreach (var chunk in FindPath(start, finish))
-        SpawnRoadChunk(chunk.X, chunk.Y);
+      var points = SetPoints();
+      var currentStart = start;
+      var currentFinish = start;
+      
+      for (int i = 0; i < points.Count+1; i++)
+      {
+        currentStart = currentFinish;
+        currentFinish = i>=points.Count?finish:points[i];
+        
+        foreach (var chunk in FindPath(currentStart, currentFinish))
+        {
+          SpawnRoadChunk(chunk.X, chunk.Y);
+          Debug.Log(chunk.X + " " + chunk.Y);
+        }
+      }
     }
 
     private MapChunk SpawnCastle()
@@ -110,7 +126,7 @@ namespace CodeBase.Generators.MapGenerator
     {
       List<MapChunk> neighbors = new List<MapChunk>();
 
-      for (int x = -1; x <= 1; x++)
+      for (int x = 1; x >= -1; x--)
       {
         for (int y = -1; y <= 1; y++)
         {
@@ -142,6 +158,22 @@ namespace CodeBase.Generators.MapGenerator
 
       path.Reverse();
       return path;
+    }
+
+    private List<MapChunk> SetPoints()
+    {
+      List<MapChunk> randomPoints = new List<MapChunk>();
+
+      for (int i = 0; i < _mapSizeZ; i++)
+      {
+        if (i%4 == 0)
+          randomPoints.Add(_mapChunks[Random.Range(0, _mapSizeX), i]);
+      }
+      
+      foreach(var point in randomPoints)
+        Debug.Log(point.X +", "+ point.Y);
+
+      return randomPoints;
     }
   }
 }
