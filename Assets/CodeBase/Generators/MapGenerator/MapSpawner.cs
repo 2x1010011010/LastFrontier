@@ -125,8 +125,24 @@ namespace CodeBase.Generators.MapGenerator
     private List<MapChunk> FindNeighbors(MapChunk currentChunk)
     {
       List<MapChunk> neighbors = new List<MapChunk>();
-
-      for (int x = 1; x >= -1; x--)
+      int startPoint;
+      int lastPoint;
+      int term;
+        
+      if(currentChunk.X >= _mapSizeX / 2)
+      {
+        startPoint = 1;
+        lastPoint = -2;
+        term = -1;
+      }
+      else
+      {
+        startPoint = -1;
+        lastPoint = 2;
+        term = 1;
+      }
+      
+      for (int x = startPoint; x != lastPoint; x += term)
       {
         for (int y = -1; y <= 1; y++)
         {
@@ -142,6 +158,7 @@ namespace CodeBase.Generators.MapGenerator
           }
         }
       }
+
       return neighbors;
     }
 
