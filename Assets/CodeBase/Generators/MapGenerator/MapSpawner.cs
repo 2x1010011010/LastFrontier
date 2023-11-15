@@ -16,6 +16,7 @@ namespace CodeBase.Generators.MapGenerator
     private Chunk[,] _spawnedChunks;
     private MapChunk[,] _mapChunks;
     private HashSet<Chunk> _path;
+    private RoadGenerator _roadGenerator;
       
     public Chunk[,] SpawnedChunks => _spawnedChunks;
     public MapChunk[,] MapChunks => _mapChunks;
@@ -46,7 +47,8 @@ namespace CodeBase.Generators.MapGenerator
           _spawnedChunks[x, z] = chunk;
         }
       }
-      
+
+      _roadGenerator = new RoadGenerator(_mapChunks, _mapSizeX, _mapSizeZ);
       var finishPoint = SpawnCastle();
       var startPoint = SpawnPortal();
       SpawnRoad(startPoint, finishPoint);
@@ -55,8 +57,8 @@ namespace CodeBase.Generators.MapGenerator
 
     private void SpawnRoad(MapChunk start, MapChunk finish)
     {
-      var points = SetPoints();
-      var currentStart = start;
+      var points = _roadGenerator.SetPoints();
+      MapChunk currentStart;
       var currentFinish = start;
       
       for (int i = 0; i < points.Count+1; i++)
@@ -64,10 +66,9 @@ namespace CodeBase.Generators.MapGenerator
         currentStart = currentFinish;
         currentFinish = i>=points.Count?finish:points[i];
         
-        foreach (var chunk in FindPath(currentStart, currentFinish))
+        foreach (var chunk in _roadGenerator.FindPath(currentStart, currentFinish))
         {
           SpawnRoadChunk(chunk.X, chunk.Y);
-          Debug.Log(chunk.X + " " + chunk.Y);
         }
       }
     }
@@ -92,105 +93,6 @@ namespace CodeBase.Generators.MapGenerator
       var roadChunk = Instantiate(_roadChunkPrefab, new Vector3(x * _chunkSize.x,0, z * _chunkSize.z), _roadChunkPrefab.transform.rotation);
       _spawnedChunks[x, z] = roadChunk;
       _mapChunks[x, z].VisitChunk();
-    }
-
-    private List<MapChunk> FindPath(MapChunk start, MapChunk finish)
-    {
-      var openSet = new Queue<MapChunk>();
-      var closedSet = new HashSet<MapChunk>();
-      
-      openSet.Enqueue(start);
-
-      while (openSet.Count > 0)
-      {
-        var currentChunk = openSet.Dequeue();
-
-        if (currentChunk == finish)
-        {
-          return RetracePath(start, finish);
-        }
-
-        foreach (var neighbor in FindNeighbors(currentChunk).Where(neighbor => !closedSet.Contains(neighbor)).Where(neighbor => !openSet.Contains(neighbor)))
-        {
-          neighbor.Parent = currentChunk;
-          openSet.Enqueue(neighbor);
-        }
-
-        closedSet.Add(currentChunk);
-      }
-      
-      return null;
-    }
-
-    private List<MapChunk> FindNeighbors(MapChunk currentChunk)
-    {
-      List<MapChunk> neighbors = new List<MapChunk>();
-      int startPoint;
-      int lastPoint;
-      int term;
-        
-      if(currentChunk.X >= _mapSizeX / 2)
-      {
-        startPoint = 1;
-        lastPoint = -2;
-        term = -1;
-      }
-      else
-      {
-        startPoint = -1;
-        lastPoint = 2;
-        term = 1;
-      }
-      
-      for (int x = startPoint; x != lastPoint; x += term)
-      {
-        for (int y = -1; y <= 1; y++)
-        {
-          if (Mathf.Abs(x) == Mathf.Abs(y))
-            continue;
-
-          var checkX = currentChunk.X + x;
-          var checkY = currentChunk.Y + y;
-
-          if (checkX >= 0 && checkX < _mapSizeX && checkY >= 0 && checkY < _mapSizeZ)
-          {
-            neighbors.Add(_mapChunks[checkX, checkY]);
-          }
-        }
-      }
-
-      return neighbors;
-    }
-
-    private List<MapChunk> RetracePath(MapChunk start, MapChunk finish)
-    {
-      var path = new List<MapChunk>();
-      var currentChunk = finish;
-
-      while (currentChunk != start)
-      {
-        path.Add(currentChunk);
-        currentChunk = currentChunk.Parent;
-      }
-
-      path.Reverse();
-      return path;
-    }
-
-    private List<MapChunk> SetPoints()
-    {
-      List<MapChunk> randomPoints = new List<MapChunk>();
-
-      for (int i = 0; i < _mapSizeZ; i++)
-      {
-        if (i%4 == 0)
-          randomPoints.Add(_mapChunks[Random.Range(0, _mapSizeX), i]);
-      }
-      
-      foreach(var point in randomPoints)
-        Debug.Log(point.X +", "+ point.Y);
-
-      return randomPoints;
     }
   }
 }
