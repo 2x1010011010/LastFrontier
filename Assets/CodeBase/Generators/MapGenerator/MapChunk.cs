@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CodeBase.Generators.MapGenerator
 {
-  public class MapChunk
+  public sealed class MapChunk
   {
     private int _coordinateX;
     private int _coordinateY;

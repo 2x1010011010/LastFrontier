@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
-    public class Bootstrap : MonoBehaviour
+    public sealed class Bootstrap : MonoBehaviour
     {
         [SerializeField] private MapSpawner _spawner;
         [SerializeField] private MapGeneratorSettings _mapSettings;

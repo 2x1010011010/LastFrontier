@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Generators.MapGenerator
 {
-  public class RoadGenerator
+  public sealed class RoadGenerator
   {
     private MapChunk[,] _map;
     private int _mapSizeX;
@@ -48,7 +48,7 @@ namespace CodeBase.Generators.MapGenerator
     
     public List<MapChunk> SetPoints()
     {
-      List<MapChunk> randomPoints = new List<MapChunk>();
+      var randomPoints = new List<MapChunk>();
 
       for (int i = 0; i < _mapSizeZ; i++)
       {
@@ -61,7 +61,7 @@ namespace CodeBase.Generators.MapGenerator
 
     private List<MapChunk> FindNeighbors(MapChunk currentChunk)
     {
-      List<MapChunk> neighbors = new List<MapChunk>();
+      var neighbors = new List<MapChunk>();
       int startPoint;
       int lastPoint;
       int term;

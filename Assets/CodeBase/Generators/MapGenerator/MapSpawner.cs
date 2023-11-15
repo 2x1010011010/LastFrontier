@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using CodeBase.Generators.MapGenerator.ScriptableObjects;
 using UnityEngine;
 
 namespace CodeBase.Generators.MapGenerator
 {
-  public class MapSpawner : MonoBehaviour
+  public sealed class MapSpawner : MonoBehaviour
   {
     private Chunk _mapChunkPrefab;
     private Chunk _roadChunkPrefab;

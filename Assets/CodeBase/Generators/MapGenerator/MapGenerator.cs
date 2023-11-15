@@ -1,6 +1,6 @@
 namespace CodeBase.Generators.MapGenerator
 {
-  public class MapGenerator
+  public sealed class MapGenerator
   {
     private int _width;
     private int _lenght;
