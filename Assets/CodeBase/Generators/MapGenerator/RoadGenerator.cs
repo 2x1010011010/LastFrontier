@@ -9,6 +9,7 @@ namespace CodeBase.Generators.MapGenerator
     private MapChunk[,] _map;
     private int _mapSizeX;
     private int _mapSizeZ;
+    private int _pointPosition = 0;
 
     public RoadGenerator(MapChunk[,] map, int mapSizeX, int mapSizeZ)
     {
@@ -49,11 +50,21 @@ namespace CodeBase.Generators.MapGenerator
     public List<MapChunk> SetPoints()
     {
       var randomPoints = new List<MapChunk>();
+      _pointPosition = Random.Range(1, 3);
 
-      for (int i = 0; i < _mapSizeZ; i++)
+      for (var i = 0; i < _mapSizeZ; i++)
       {
-        if (i%4 == 0)
-          randomPoints.Add(_map[Random.Range(0, _mapSizeX), i]);
+        switch (i % 4)
+        {
+          case 0 when _pointPosition % 2 == 0:
+            randomPoints.Add(_map[Random.Range(_mapSizeX/2, _mapSizeX), i]);
+            _pointPosition++;
+            break;
+          case 0 when _pointPosition % 2 != 0:
+            randomPoints.Add(_map[Random.Range(0, _mapSizeX/2), i]);
+            _pointPosition++;
+            break;
+        }
       }
 
       return randomPoints;

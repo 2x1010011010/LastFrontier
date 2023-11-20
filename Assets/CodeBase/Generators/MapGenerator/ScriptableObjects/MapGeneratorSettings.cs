@@ -6,7 +6,7 @@ namespace CodeBase.Generators.MapGenerator.ScriptableObjects
   [CreateAssetMenu(fileName = "MapGeneratorSettings", menuName = "Scriptable Objects/Map Generator", order = 51)]
   public class MapGeneratorSettings : ScriptableObject
   {
-    [field: SerializeField] public Chunk MapChunkPrefab { get; private set; }
+    [field: SerializeField] public List<Chunk> MapChunkPrefabs { get; private set; }
     [field: SerializeField] public Chunk RoadChunkPrefab { get; private set; }
     [field: SerializeField] public GameObject CastlePrefab { get; private set; }
     [field: SerializeField] public int MapSizeX { get; private set; }

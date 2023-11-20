@@ -6,7 +6,7 @@ namespace CodeBase.Generators.MapGenerator
 {
   public sealed class MapSpawner : MonoBehaviour
   {
-    private Chunk _mapChunkPrefab;
+    private List<Chunk> _mapChunkPrefabs = new List<Chunk>();
     private Chunk _roadChunkPrefab;
     private GameObject _castlePrefab;
     private int _mapSizeX;
@@ -23,7 +23,7 @@ namespace CodeBase.Generators.MapGenerator
 
     public void Initialize(MapGeneratorSettings settings)
     {
-      _mapChunkPrefab = settings.MapChunkPrefab;
+      _mapChunkPrefabs = settings.MapChunkPrefabs;
       _roadChunkPrefab = settings.RoadChunkPrefab;
       _castlePrefab = settings.CastlePrefab;
       _mapSizeX = settings.MapSizeX;
@@ -41,7 +41,8 @@ namespace CodeBase.Generators.MapGenerator
       {
         for (int z = 0; z < _mapSizeZ; z++)
         {
-          Chunk chunk = Instantiate(_mapChunkPrefab, new Vector3(x * _chunkSize.x, 0, z * _chunkSize.z), _mapChunkPrefab.transform.rotation).GetComponent<Chunk>();
+          var instance = _mapChunkPrefabs[Random.Range(0, _mapChunkPrefabs.Count)];
+          Chunk chunk = Instantiate(instance, new Vector3(x * _chunkSize.x, 0, z * _chunkSize.z), instance.transform.rotation).GetComponent<Chunk>();
           chunk.transform.localScale = Vector3.one;
           _spawnedChunks[x, z] = chunk;
         }

@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6870cbdcc937846a3609cf65ef5d57, type: 3}
   m_Name: MapGeneratorSettings1
   m_EditorClassIdentifier: 
-  <MapChunkPrefab>k__BackingField: {fileID: 6225898673215629945, guid: c2e3a6f20d30c574c9c3e2142667f81e, type: 3}
+  <MapChunkPrefabs>k__BackingField:
+  - {fileID: 3167957013464403526, guid: c2e3a6f20d30c574c9c3e2142667f81e, type: 3}
+  - {fileID: 2924467563733595638, guid: bf92d2a96b075e14eb048c3b045e780f, type: 3}
+  - {fileID: 9200645496133095737, guid: 79f8959064469a848968ef4bb7f39550, type: 3}
   <RoadChunkPrefab>k__BackingField: {fileID: 6363358738138021436, guid: d05233e6e31aebb478654beb71f8a026, type: 3}
   <CastlePrefab>k__BackingField: {fileID: 2888982414222755443, guid: ae75205524e8a01409619b0f3396e9eb, type: 3}
-  <MapSizeX>k__BackingField: 5
+  <MapSizeX>k__BackingField: 7
   <MapSizeZ>k__BackingField: 15
   <ChunkSize>k__BackingField: {x: 2, y: 2, z: 2}
