@@ -43,7 +43,6 @@ namespace CodeBase.Generators.MapGenerator
         {
           var instance = _mapChunkPrefabs[Random.Range(0, _mapChunkPrefabs.Count)];
           Chunk chunk = Instantiate(instance, new Vector3(x * _chunkSize.x, 0, z * _chunkSize.z), instance.transform.rotation).GetComponent<Chunk>();
-          chunk.transform.localScale = Vector3.one;
           _spawnedChunks[x, z] = chunk;
         }
       }
