@@ -1,10 +1,11 @@
 using CodeBase.Generators.MapGenerator;
 using CodeBase.Generators.MapGenerator.ScriptableObjects;
+using CodeBase.Infrastructure.StateMachine;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
-  public sealed class Bootstrap : MonoBehaviour
+  public sealed class Bootstrap : MonoBehaviour, ICoroutineRunner
   {
     [SerializeField] private MapSpawner _spawner;
     [SerializeField] private MapGeneratorSettings _mapSettings;
@@ -12,14 +13,15 @@ namespace CodeBase.Infrastructure
 
     private void Awake()
     {
-      _game = new Game();
+      _game = new Game(this);
+      _game.StateMachine.Enter<BootstrapState>();
       DontDestroyOnLoad(this);
     }
 
-    private void Start()
+    /*private void Start()
     {
       _spawner.Initialize(_mapSettings);
       _spawner.SpawnMap();
-    }
+    }*/
   }
 }
