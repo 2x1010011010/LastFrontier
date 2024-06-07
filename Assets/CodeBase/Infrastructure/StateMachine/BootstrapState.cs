@@ -19,11 +19,11 @@ namespace CodeBase.Infrastructure.StateMachine
     public void Enter()
     {
       RegisterServices();
-      _sceneLoader.Load(Initial, EnterLoadLevel);
+      _sceneLoader.Load(sceneName: Initial, onLoadAction: EnterLoadLevel);
     }
 
     private void EnterLoadLevel() =>
-      _stateMachine.Enter<LoadLevelState>();
+      _stateMachine.Enter<LoadLevelState, string>("Main");
 
     public void Exit()
     {

@@ -11,14 +11,14 @@ namespace CodeBase.Infrastructure
     public SceneLoader(ICoroutineRunner coroutineRunner) =>
       _coroutineRunner = coroutineRunner;
 
-    public void Load(string name, Action action = null) =>
-      _coroutineRunner.StartCoroutine(LoadScene(name, action));
+    public void Load(string sceneName, Action onLoadAction = null) =>
+      _coroutineRunner.StartCoroutine(LoadScene(sceneName, onLoadAction));
 
-    private  IEnumerator LoadScene(string nextSceneName, Action onLoaded = null)
+    private IEnumerator LoadScene(string nextSceneName, Action onLoaded = null)
     {
       if (SceneManager.GetActiveScene().name == nextSceneName)
       {
-        onLoaded?.Invoke();
+        OnLoadedAction(onLoaded);
         yield break;
       }
 
@@ -27,7 +27,10 @@ namespace CodeBase.Infrastructure
       while (!waitNextScene.isDone)
         yield return null;
       
-      onLoaded?.Invoke();
+      OnLoadedAction(onLoaded);
     }
+
+    private void OnLoadedAction(Action onLoaded) =>
+      onLoaded?.Invoke();
   }
 }
