@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeBase.Infrastructure.StateMachine
+namespace CodeBase.Infrastructure.StateMachine.States
 {
   public class LoadLevelState : IPayloadedState<string>
   {

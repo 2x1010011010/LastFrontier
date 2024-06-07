@@ -1,6 +1,7 @@
 using CodeBase.Generators.MapGenerator;
 using CodeBase.Generators.MapGenerator.ScriptableObjects;
 using CodeBase.Infrastructure.StateMachine;
+using CodeBase.Infrastructure.StateMachine.States;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure

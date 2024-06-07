@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CodeBase.Infrastructure.StateMachine.States;
 
 
 namespace CodeBase.Infrastructure.StateMachine
