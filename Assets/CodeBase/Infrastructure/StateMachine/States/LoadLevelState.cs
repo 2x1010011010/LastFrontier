@@ -14,11 +14,16 @@ namespace CodeBase.Infrastructure.StateMachine.States
     }
 
     public void Enter(string sceneName) =>
-      _sceneLoader.Load(sceneName);
+      _sceneLoader.Load(sceneName, OnLoaded);
 
     public void Exit()
     {
       throw new NotImplementedException();
+    }
+    
+    private void OnLoaded()
+    {
+      //Spawn map 
     }
   }
 }

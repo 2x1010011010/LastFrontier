@@ -16,6 +16,7 @@ namespace CodeBase.Infrastructure.StateMachine
       {
         [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
         [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader),
+        [typeof(GameLoopState)] = new GameLoopState(this),
         
       };
     }

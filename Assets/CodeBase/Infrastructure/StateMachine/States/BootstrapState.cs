@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
 using UnityEngine;
 
@@ -32,10 +33,13 @@ namespace CodeBase.Infrastructure.StateMachine.States
     
     private void RegisterServices()
     {
-      Game.InputService = RegisterInputService();
+      Game.InputService = InputService();
+
+      AllServices.Container.RegisterSingle<IInputService>(InputService());
+      AllServices.Container.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssetProvider>));
     }
     
-    private static IInputService RegisterInputService()
+    private static IInputService InputService()
     {
       if (Application.isEditor)
         return new DesktopInputService();
