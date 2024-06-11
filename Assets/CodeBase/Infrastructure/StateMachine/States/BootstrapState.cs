@@ -36,7 +36,7 @@ namespace CodeBase.Infrastructure.StateMachine.States
       Game.InputService = InputService();
 
       AllServices.Container.RegisterSingle<IInputService>(InputService());
-      AllServices.Container.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssetProvider>));
+      AllServices.Container.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssetProvider>()));
     }
     
     private static IInputService InputService()

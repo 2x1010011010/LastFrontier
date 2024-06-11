@@ -13,11 +13,6 @@ namespace CodeBase.Infrastructure
       _assetProvider = assetProvider;
     }
 
-    public GameFactory(Func<IService> assetProvider)
-    {
-      throw new NotImplementedException();
-    }
-
     public GameObject CreateMap()
     {
       throw new System.NotImplementedException();
