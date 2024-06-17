@@ -10,41 +10,37 @@ namespace CodeBase.Infrastructure.StateMachine.States
     private const string Initial = "Initial";
     private readonly GameStateMachine _stateMachine;
     private readonly SceneLoader _sceneLoader;
+    private readonly AllServices _services;
 
-    public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+    public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, AllServices services)
     {
       _stateMachine = stateMachine;
       _sceneLoader = sceneLoader;
+      _services = services;
+      
+      RegisterServices();
     }
 
     public void Enter()
     {
-      RegisterServices();
       _sceneLoader.Load(sceneName: Initial, onLoadAction: EnterLoadLevel);
+    }
+
+    public void Exit()
+    {
+    }
+
+    private void RegisterServices()
+    {
+      _services.RegisterSingle<IAssetProvider>(new AssetProvider());
+      _services.RegisterSingle<IInputService>(InputService());
+      _services.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssetProvider>()));
     }
 
     private void EnterLoadLevel() =>
       _stateMachine.Enter<LoadLevelState, string>("Main");
 
-    public void Exit()
-    {
-      throw new NotImplementedException();
-    }
-    
-    private void RegisterServices()
-    {
-      Game.InputService = InputService();
-
-      AllServices.Container.RegisterSingle<IInputService>(InputService());
-      AllServices.Container.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssetProvider>()));
-    }
-    
-    private static IInputService InputService()
-    {
-      if (Application.isEditor)
-        return new DesktopInputService();
-      else
-        return new MobileInputService();
-    }
+    private static IInputService InputService() =>
+      Application.isEditor ? new DesktopInputService() : new MobileInputService();
   }
 }

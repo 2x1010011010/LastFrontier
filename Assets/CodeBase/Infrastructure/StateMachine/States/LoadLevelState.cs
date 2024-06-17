@@ -6,11 +6,13 @@ namespace CodeBase.Infrastructure.StateMachine.States
   {
     private readonly GameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
+    private readonly IGameFactory _gameFactory;
 
-    public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader)
+    public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory)
     {
       _gameStateMachine = gameStateMachine;
       _sceneLoader = sceneLoader;
+      _gameFactory = gameFactory;
     }
 
     public void Enter(string sceneName) =>
