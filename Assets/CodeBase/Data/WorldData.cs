@@ -3,8 +3,8 @@ using System;
 namespace CodeBase.Data
 {
   [Serializable]
-  public class PlayerProgress
+  public class WorldData
   {
-    public WorldData WorldData;
+    public LevelData levelData;
   }
 }
